@@ -1,0 +1,49 @@
+import random
+import string
+
+def generate_password(length, include_uppercase, include_lowercase, include_numbers, include_special_chars):
+    characters = ''
+    
+    if include_uppercase:
+        characters += string.ascii_uppercase
+    
+    if include_lowercase:
+        characters += string.ascii_lowercase
+    
+    if include_numbers:
+        characters += string.digits
+    
+    if include_special_chars:
+        characters += string.punctuation
+    
+    if not characters:
+        return '无效的密码要求。'
+    
+    password = ''.join(random.choice(characters) for _ in range(length))
+    return password
+
+print("密码生成器命令行工具")
+
+while True:
+    print("\n请选择密码要求：")
+    print("1. 指定密码长度和包含的字符类型")
+    print("2. 退出程序")
+    
+    choice = input("请选择操作（输入数字）：")
+    
+    if choice == '2':
+        print("谢谢使用，再见！")
+        break
+    
+    if choice != '1':
+        print("无效的选择，请重新输入。")
+        continue
+    
+    length = int(input("请输入密码长度："))
+    include_uppercase = input("是否包含大写字母？(Y/N)：").upper() == 'Y'
+    include_lowercase = input("是否包含小写字母？(Y/N)：").upper() == 'Y'
+    include_numbers = input("是否包含数字？(Y/N)：").upper() == 'Y'
+    include_special_chars = input("是否包含特殊字符？(Y/N)：").upper() == 'Y'
+    
+    password = generate_password(length, include_uppercase, include_lowercase, include_numbers, include_special_chars)
+    print("生成的密码：", password)
